@@ -11,7 +11,7 @@ export default async function authValidation(req, res, next) {
         const session = await checkToken(token);
         if (session.rows.length <= 0) return res.sendStatus(401);
 
-        res.locals.session = session;
+        res.locals.session = session.rows[0];
 
         next();
 

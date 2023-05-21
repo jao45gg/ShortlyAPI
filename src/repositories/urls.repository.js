@@ -15,3 +15,11 @@ export async function getUrl(shortUrl) {
 export async function getShortById(id) {
     return db.query(`SELECT id, "shortUrl", url FROM "links" WHERE id=$1`, [id]);
 }
+
+export async function getUrlAndUserById(id) {
+    return db.query(`SELECT * FROM "links" JOIN "users" ON "links"."userId" = "users".id WHERE "links".id=$1`, [id]);
+}
+
+export async function deleteShorten(id) {
+    return db.query(`DELETE FROM "links" WHERE id=$1`, [id]);
+}
