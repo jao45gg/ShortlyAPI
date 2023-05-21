@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import { nanoid } from "nanoid";
-import { checkEmail, registerNewToken, registerNewUser } from "../repositories/users.repository.js";
+import { checkEmail, getUserById, registerNewToken, registerNewUser } from "../repositories/users.repository.js";
+import { getShortenedUrl } from "../repositories/urls.repository.js";
 
 export async function signUp(req, res) {
     try {
@@ -40,6 +41,24 @@ export async function signIn(req, res) {
         await registerNewToken(session);
 
         res.send({ token: session.token });
+    } catch (err) {
+        res.status(500).send(err.message);
+    }
+}
+
+export async function getUser(req, res) {
+    try {
+        const id = res.locals.session.userId;
+
+        const user = await getUserById(id);
+        const shortenedUrls = (await getShortenedUrl(id)).rows;
+
+        res.send({
+            id: user.rows[0].id,
+            name: user.rows[0].name,
+            visitCount: user.rows[0].visitCount,
+            shortenedUrls
+        });
     } catch (err) {
         res.status(500).send(err.message);
     }

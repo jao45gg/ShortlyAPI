@@ -23,3 +23,11 @@ export async function getUrlAndUserById(id) {
 export async function deleteShorten(id) {
     return db.query(`DELETE FROM "links" WHERE id=$1`, [id]);
 }
+
+export async function getShortenedUrl(userId) {
+    return db.query(`SELECT id, "shortUrl", url, "visitCount" FROM "links" WHERE "userId"=$1`, [userId]);
+}
+
+export async function updateCountLink(id) {
+    return db.query(`UPDATE "links" SET "visitCount"="visitCount"+1 WHERE id=$1`, [id]);
+}

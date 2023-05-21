@@ -21,3 +21,11 @@ export async function registerNewToken(session) {
 
     return db.query(`INSERT INTO "tokens" ("userId", token) VALUES ($1, $2)`, [userId, token]);
 }
+
+export async function getUserById(id) {
+    return db.query(`SELECT * FROM "users" WHERE id=$1`, [id]);
+}
+
+export async function updateCountUser(id) {
+    return db.query(`UPDATE "users" SET "visitCount"="visitCount"+1 WHERE id=$1`, [id]);
+}
