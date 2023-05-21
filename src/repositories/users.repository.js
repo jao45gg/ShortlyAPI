@@ -14,3 +14,10 @@ export async function registerNewUser(user) {
 export async function checkEmail(email) {
     return db.query(`SELECT * FROM "users" WHERE email=$1`, [email]);
 }
+
+export async function registerNewToken(session) {
+
+    const { token, userId } = session;
+
+    return db.query(`INSERT INTO "tokens" ("userId", token) VALUES ($1, $2)`, [userId, token]);
+}
