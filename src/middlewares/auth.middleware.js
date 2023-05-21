@@ -1,4 +1,3 @@
-import db from "../database/database.connection.js";
 import { checkToken } from "../repositories/users.repository.js";
 
 export default async function authValidation(req, res, next) {
@@ -11,6 +10,8 @@ export default async function authValidation(req, res, next) {
 
         const session = await checkToken(token);
         if (session.rows.length <= 0) return res.sendStatus(401);
+
+        res.locals.session = session;
 
         next();
 
