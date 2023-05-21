@@ -8,6 +8,10 @@ export async function getShort(shortUrl) {
     return db.query(`SELECT id, "shortUrl" FROM "links" WHERE "shortUrl"=$1`, [shortUrl]);
 }
 
+export async function getUrl(shortUrl) {
+    return db.query(`SELECT * FROM "links" WHERE "shortUrl"=$1`, [shortUrl]);
+}
+
 export async function getShortById(id) {
     return db.query(`SELECT id, "shortUrl", url FROM "links" WHERE id=$1`, [id]);
 }
