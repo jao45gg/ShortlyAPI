@@ -1,5 +1,5 @@
 import { nanoid } from "nanoid";
-import { getShort, getShortById, getUrl, getUrlAndUserById, newShortUrl, deleteShorten, updateCountLink } from "../repositories/urls.repository.js";
+import { getShort, getShortById, getUrl, newShortUrl, deleteShorten, updateCountLink } from "../repositories/urls.repository.js";
 import { updateCountUser } from "../repositories/users.repository.js";
 
 export async function shorten(req, res) {
@@ -47,13 +47,13 @@ export async function openUrl(req, res) {
 
 export async function deleteUrl(req, res) {
     try {
-        let { id } = req.params;
+        const { id } = req.params;
 
         const url = await getShortById(id);
         if (url.rowCount <= 0) return res.sendStatus(404);
 
-        const data = await getUrlAndUserById(id);
-        if (data.rowCount <= 0) return res.sendStatus(401);
+        const data = await getUrl(url.rows[0].shortUrl);
+        if (data.rows[0].userId !== res.locals.session.userId) return res.sendStatus(401);
 
         await deleteShorten(id);
 

@@ -93,7 +93,8 @@ ALTER SEQUENCE public.links_id_seq OWNED BY public.links.id;
 CREATE TABLE public.tokens (
     id integer NOT NULL,
     "userId" integer,
-    token text NOT NULL
+    token text NOT NULL,
+    "createdAt" timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
@@ -179,19 +180,18 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 INSERT INTO public.links VALUES (2, 'nvuVOKbaf8fF2N6yhuNuO', 'https://www.google.com/?client=safari', 0, NULL, '2023-05-21 18:55:32.88533');
 INSERT INTO public.links VALUES (3, '0oNII-nTwdbHbFbkFfDGm', 'https://www.google.com', 0, NULL, '2023-05-21 20:33:18.133066');
 INSERT INTO public.links VALUES (4, 'cfnNpsZ3AJm1bb7_FUXFf', 'https://www.google.com', 0, NULL, '2023-05-21 20:56:18.12886');
-INSERT INTO public.links VALUES (8, '1EqNGqUFMNO2STbAZ3f-6', 'https://web.whatsapp.com', 0, 4, '2023-05-22 10:22:15.081113');
 INSERT INTO public.links VALUES (9, 'qwP8uUy9oyVDXmM1EcQvZ', 'https://web.whatsapp.com', 0, 4, '2023-05-22 10:22:20.349059');
 INSERT INTO public.links VALUES (1, 'WAxbXcnEf1lpBCcZSfBLA', 'https://www.google.com/?client=safari', 6, NULL, '2023-05-21 18:50:33.720055');
-INSERT INTO public.links VALUES (7, 'M4vnQVCq9YGplUNFx9l8Q', 'https://www.google.com', 7, 3, '2023-05-21 23:03:18.850334');
 
 
 --
 -- Data for Name: tokens; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public.tokens VALUES (1, 3, 'epleyVQMaeLaTdURXHw_h');
-INSERT INTO public.tokens VALUES (2, 3, 'P7b6F-r60j5C3Thj7hLO2');
-INSERT INTO public.tokens VALUES (3, 4, 'kL_xy_ze7e7ugM2VzOXfB');
+INSERT INTO public.tokens VALUES (1, 3, 'epleyVQMaeLaTdURXHw_h', '2023-05-22 18:26:43.141569');
+INSERT INTO public.tokens VALUES (2, 3, 'P7b6F-r60j5C3Thj7hLO2', '2023-05-22 18:26:43.141569');
+INSERT INTO public.tokens VALUES (3, 4, 'kL_xy_ze7e7ugM2VzOXfB', '2023-05-22 18:26:43.141569');
+INSERT INTO public.tokens VALUES (4, 3, 'O-dSng94WiM-knAu2uDp_', '2023-05-22 18:36:26.33735');
 
 
 --
@@ -214,7 +214,7 @@ SELECT pg_catalog.setval('public.links_id_seq', 9, true);
 -- Name: tokens_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.tokens_id_seq', 3, true);
+SELECT pg_catalog.setval('public.tokens_id_seq', 4, true);
 
 
 --
