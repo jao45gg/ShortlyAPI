@@ -29,3 +29,11 @@ export async function getUserById(id) {
 export async function updateCountUser(id) {
     return db.query(`UPDATE "users" SET "visitCount"="visitCount"+1 WHERE id=$1`, [id]);
 }
+
+export async function getRanking() {
+    return db.query(`SELECT "users".id, name, COUNT(*) AS "linksCount", "users"."visitCount"
+                        FROM "links" JOIN "users" ON users.id=links."userId"
+                        GROUP BY "users".id
+                        ORDER BY "users"."visitCount" DESC
+                        FETCH FIRST 10 ROWS ONLY`);
+}

@@ -36,7 +36,6 @@ export async function openUrl(req, res) {
         const url = await getUrl(shortUrl);
         if (url.rowCount <= 0) return res.sendStatus(404);
 
-        console.log(url.rows[0])
         await updateCountLink(url.rows[0].id);
         await updateCountUser(url.rows[0].userId);
 
