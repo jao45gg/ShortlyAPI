@@ -16,6 +16,24 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
+ALTER TABLE IF EXISTS ONLY public.tokens DROP CONSTRAINT IF EXISTS "tokens_userId_fkey";
+ALTER TABLE IF EXISTS ONLY public.links DROP CONSTRAINT IF EXISTS "links_userId_fkey";
+ALTER TABLE IF EXISTS ONLY public.users DROP CONSTRAINT IF EXISTS users_pkey;
+ALTER TABLE IF EXISTS ONLY public.users DROP CONSTRAINT IF EXISTS users_email_key;
+ALTER TABLE IF EXISTS ONLY public.tokens DROP CONSTRAINT IF EXISTS tokens_token_key;
+ALTER TABLE IF EXISTS ONLY public.tokens DROP CONSTRAINT IF EXISTS tokens_pkey;
+ALTER TABLE IF EXISTS ONLY public.links DROP CONSTRAINT IF EXISTS "links_shortUrl_key";
+ALTER TABLE IF EXISTS ONLY public.links DROP CONSTRAINT IF EXISTS links_pkey;
+ALTER TABLE IF EXISTS public.users ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE IF EXISTS public.tokens ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE IF EXISTS public.links ALTER COLUMN id DROP DEFAULT;
+DROP SEQUENCE IF EXISTS public.users_id_seq;
+DROP TABLE IF EXISTS public.users;
+DROP SEQUENCE IF EXISTS public.tokens_id_seq;
+DROP TABLE IF EXISTS public.tokens;
+DROP SEQUENCE IF EXISTS public.links_id_seq;
+DROP TABLE IF EXISTS public.links;
+DROP SCHEMA IF EXISTS public;
 --
 -- Name: public; Type: SCHEMA; Schema: -; Owner: -
 --
@@ -161,10 +179,10 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 INSERT INTO public.links VALUES (2, 'nvuVOKbaf8fF2N6yhuNuO', 'https://www.google.com/?client=safari', 0, NULL, '2023-05-21 18:55:32.88533');
 INSERT INTO public.links VALUES (3, '0oNII-nTwdbHbFbkFfDGm', 'https://www.google.com', 0, NULL, '2023-05-21 20:33:18.133066');
 INSERT INTO public.links VALUES (4, 'cfnNpsZ3AJm1bb7_FUXFf', 'https://www.google.com', 0, NULL, '2023-05-21 20:56:18.12886');
-INSERT INTO public.links VALUES (1, 'WAxbXcnEf1lpBCcZSfBLA', 'https://www.google.com/?client=safari', 1, NULL, '2023-05-21 18:50:33.720055');
 INSERT INTO public.links VALUES (8, '1EqNGqUFMNO2STbAZ3f-6', 'https://web.whatsapp.com', 0, 4, '2023-05-22 10:22:15.081113');
 INSERT INTO public.links VALUES (9, 'qwP8uUy9oyVDXmM1EcQvZ', 'https://web.whatsapp.com', 0, 4, '2023-05-22 10:22:20.349059');
-INSERT INTO public.links VALUES (7, 'M4vnQVCq9YGplUNFx9l8Q', 'https://www.google.com', 3, 3, '2023-05-21 23:03:18.850334');
+INSERT INTO public.links VALUES (1, 'WAxbXcnEf1lpBCcZSfBLA', 'https://www.google.com/?client=safari', 6, NULL, '2023-05-21 18:50:33.720055');
+INSERT INTO public.links VALUES (7, 'M4vnQVCq9YGplUNFx9l8Q', 'https://www.google.com', 7, 3, '2023-05-21 23:03:18.850334');
 
 
 --
@@ -182,7 +200,7 @@ INSERT INTO public.tokens VALUES (3, 4, 'kL_xy_ze7e7ugM2VzOXfB');
 
 INSERT INTO public.users VALUES (1, 'julia', 'julia@julia.com', '$2b$10$/bymQd9dCNeDnIEvmeQSP.dhRT2nRSr0v7mM//bJMvkKuyCjEpE9K', '2023-05-21 16:34:00.303383', 3);
 INSERT INTO public.users VALUES (4, 'teste123', 'teste@tes.com', '$2b$10$sTdleJ71AMAaWmMAeNniQuUN.Rq5U76lMDel39VpG4f8m/7u2qADO', '2023-05-22 10:21:14.800613', 0);
-INSERT INTO public.users VALUES (3, 'joao', 'joao@julia.com', '$2b$10$SBz5XQZJtEYy2U.1i6As4uUWAYx2XinK2Fn.CY57ifZ9JYqDZvJUe', '2023-05-21 17:02:22.226733', 3);
+INSERT INTO public.users VALUES (3, 'joao', 'joao@julia.com', '$2b$10$SBz5XQZJtEYy2U.1i6As4uUWAYx2XinK2Fn.CY57ifZ9JYqDZvJUe', '2023-05-21 17:02:22.226733', 7);
 
 
 --
